@@ -1,0 +1,48 @@
+# DEPLOYMENT
+# Describe el estado de un pod, además de hacer que Kubernetes se encargue de mantener ese estado.
+# Es decir, si el pod se cae, el deployment se encargará de crear otro para mantener el estado deseado.
+# Conceptos claves: replicas, selector, template, resources, volumeMounts
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: luissanchez-nginx
+  namespace: luissanchez
+  labels:
+    app: luissanchez-nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: luissanchez-nginx
+  template:
+    metadata:
+      labels:
+        app: luissanchez-nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.25-alpine
+          ports:
+            - containerPort: 80
+          env:
+            - name: APP_ENV
+              valueFrom:
+                configMapKeyRef:
+                  name: luissanchez-config
+                  key: APP_ENV
+            - name: APP_VERSION
+              valueFrom:
+                configMapKeyRef:
+                  name: luissanchez-config
+                  key: APP_VERSION
+            - name: APP_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: luissanchez-config
+                  key: APP_PORT
+            - name: SECRET_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: luissanchez-secret
+                  key: username

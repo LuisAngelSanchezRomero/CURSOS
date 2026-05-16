@@ -1,0 +1,14 @@
+# NAMESPACE
+# lugar de trabajo, en el cual se puede trabajar de manera
+# aislada del propio cluster de kubernetes.
+apiVersion: v1
+
+kind: Namespace
+
+metadata:
+
+  name: luissanchez
+  labels:
+    environment: clase
+    managed-by: kubectl
+    curso: kubernetes-basico

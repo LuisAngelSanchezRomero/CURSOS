@@ -1,0 +1,22 @@
+# SERVICE
+# Service lo que hace es exponer los pods a la red, ya que estos tienen distintas IP, o ips efimeras, es decir que cambian cada vez que se crean
+
+# TIPOS DE SERVICE, el clusterIp, que solo es accesible dentro del cluster, el nodeport, va a exponer un puerto en cada nodo del cluster, y el loadbalancer, que va a crear un balanceador de carga externo para distribuir el tráfico entre los pods.
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: luissanchez-service
+  namespace: luissanchez
+  labels:
+    app: luissanchez-nginx
+spec:
+  selector:
+    app: luissanchez-nginx
+
+  type: NodePort
+
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
