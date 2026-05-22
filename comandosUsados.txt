@@ -1,0 +1,37 @@
+
+  Id     Duration CommandLine
+  --     -------- -----------
+   2        1.436 kubectl cluster-info
+   3        0.154 kubectl get nodes
+   4        0.289 kubectl apply -f .\00-IsaelFatama-namespace.yml
+   5        0.143 kubectl get namespaces
+   6        0.182 kubectl describe namespace isaelfatama
+   7        0.245 kubectl apply -f .\01-IsaelFatama-secret.yml
+   8        0.150 kubectl get secrets
+   9        0.127 kubectl get secrets namespace isaelfatama
+  10        0.141 kubectl get secrets -n isaelfatama
+  11        0.137 kubectl describe secret isaelfatama-secret -n namespace
+  12        0.136 kubectl describe secret isaelfatama-secret -n isaelfatama
+  13        0.246 kubectl apply -f .\02-IsaelFatama-configmap.yml
+  14        0.124 kubectl get configmaps -n isaelfatama
+  15        0.180 kubectl describe configmap isaelfatama-config -n isaelfatama
+  16        0.275 kubectl apply -f .\03-IsaelFatama-deployment.yml
+  17        0.125 kubectl get deployments -n isaelfatama
+  18        0.150 kubectl get pods -n isaelfatama
+  19        0.133 kubectl get pods -n isaelfatama -o wide
+  20        0.190 kubectl logs isaelfatama-nginx-85db5bfc66-gpv2s -n isaelfatama
+  21        1.293 kubectl delete pod isaelfatama-nginx-85db5bfc66-gpv2s -n isaelfatama
+  22        0.112 kubectl get pods -n isaelfatama
+  23        7.937 kubectl get pods -n isaelfatama -w
+  24        0.153 kubectl scale deployment isaelfatama-nginx --replicas=4 -n isaelfatama
+  25        0.116 kubectl get pods -n isaelfatama
+  26        0.237 kubectl apply -f .\04-IsaelFatama-service.yml
+  27        0.152 kubectl get services -n isaelfatama
+  28        0.356 kubectl apply -f .\04-IsaelFatama-service.yml
+  29        0.116 kubectl get services -n isaelfatama
+  30        0.144 kubectl describe service isaelfatama-service -n isaelfatama
+  31        0.148 kubectl get svc isaelfatama-service -n isaelfatama
+  
+  33       23.557 kubectl port-forward service/isaelfatama-service 9080:80 -n isaelfatama
+  34        0.182 kubectl get all -n isaelfatama
+  35       10.125 kubectl delete namespace isaelfatama
